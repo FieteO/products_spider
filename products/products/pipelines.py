@@ -41,7 +41,7 @@ class ScreenshotPipeline:
         # Save screenshot to file, filename will be hash of url.
         url = adapter["url"]
         url_hash = hashlib.md5(url.encode("utf8")).hexdigest()
-        filename = f"{url_hash}.png"
+        filename = f"out/images/{adapter['hostname']}_{url_hash}.png"
         with open(filename, "wb") as f:
             f.write(response.body)
 

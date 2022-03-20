@@ -2,6 +2,7 @@ import scrapy
 from scrapy_splash import SplashRequest
 
 from products.items import ProductsItem
+from urllib.parse import urlparse
 
 
 class ProductsSpiderSpider(scrapy.Spider):
@@ -12,12 +13,11 @@ class ProductsSpiderSpider(scrapy.Spider):
     def start_requests(self):
         for url in self.start_urls:
             yield SplashRequest(url, self.parse, endpoint='render.json',
-                                args={ 'wait': 1 })
+                                args={ 'wait': 1.5 })
 
     def parse(self, response):
-        print(response)
-        item = ProductsItem(
-            url = response.url,
-            hostname = response.url.replace('http://localhost:8050','')
-        )
+        item = ProductsItem()
+        item['url']         = response.url
+        raw_url = response.url.replace('http://localhost:8050','')
+        item['hostname']    = urlparse(raw_url).hostname.replace('www.','')
         yield item

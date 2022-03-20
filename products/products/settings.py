@@ -71,6 +71,10 @@ FEED_EXPORTERS = {
     'csv': 'scrapy.exporters.CsvItemExporter'
 }
 
+FEEDS = {
+    "out/items.csv":{ "format": "csv" }
+}
+
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
 #AUTOTHROTTLE_ENABLED = True

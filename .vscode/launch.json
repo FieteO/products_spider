@@ -6,7 +6,7 @@
     "configurations": [
         // https://stackoverflow.com/questions/17413398/how-can-i-debug-scrapy#71429566
         {
-            "name": "Python: Current File",
+            "name": "Launch scrapy spider",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/.venv/bin/scrapy",
