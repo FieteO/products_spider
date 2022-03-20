@@ -1,0 +1,19 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        // https://stackoverflow.com/questions/17413398/how-can-i-debug-scrapy#71429566
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/.venv/bin/scrapy",
+            "cwd": "${workspaceFolder}/products",
+            "args": ["crawl", "products_spider"],
+            "console": "integratedTerminal",
+            "justMyCode": false
+        }
+    ]
+}
