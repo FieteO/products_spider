@@ -72,7 +72,7 @@ FEED_EXPORTERS = {
 }
 
 FEEDS = {
-    "out/items.csv":{ "format": "csv" }
+    "out/items.csv":{ "format": "csv", "overwrite":True }
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

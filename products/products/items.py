@@ -13,4 +13,4 @@ class ProductsItem(scrapy.Item):
     # pass
     url = Field()
     hostname = Field()
-    image_filename = Field()
+    screenshot_filename = Field()
