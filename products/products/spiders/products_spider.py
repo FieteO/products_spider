@@ -7,7 +7,7 @@ from urllib.parse import urlparse
 
 class ProductsSpiderSpider(scrapy.Spider):
     name = 'products_spider'
-    allowed_domains = ['example.com']
+    allowed_domains = ['https://ducati.com','https://citroen.com']
     start_urls = ['https://ducati.com','https://citroen.com']
 
     def start_requests(self):
@@ -17,7 +17,8 @@ class ProductsSpiderSpider(scrapy.Spider):
 
     def parse(self, response):
         item = ProductsItem()
-        item['url']         = response.url
         raw_url = response.url.replace('http://localhost:8050','')
+        item['url']         = response.url
         item['hostname']    = urlparse(raw_url).hostname.replace('www.','')
+        item['html']        = response.body
         yield item

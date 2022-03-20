@@ -14,3 +14,4 @@ class ProductsItem(scrapy.Item):
     url = Field()
     hostname = Field()
     screenshot_filename = Field()
+    html = Field()
