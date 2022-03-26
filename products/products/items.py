@@ -8,10 +8,8 @@ from scrapy.item import Field
 
 
 class ProductsItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    # pass
     url = Field()
     hostname = Field()
     screenshot_filename = Field()
+    html_filename = Field()
     html = Field()

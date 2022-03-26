@@ -5,19 +5,20 @@
 
 
 # useful for handling different item types with a single interface
+import base64
 from itemadapter import ItemAdapter
-
-
-class ProductsPipeline:
-    def process_item(self, item, spider):
-        return item
-
 import hashlib
 from urllib.parse import quote
 
 import scrapy
 from itemadapter import ItemAdapter
 from scrapy.utils.defer import maybe_deferred_to_future
+from scrapy_splash import SplashRequest
+
+
+class ProductsPipeline:
+    def process_item(self, item, spider):
+        return item
 
 
 # https://docs.scrapy.org/en/latest/topics/item-pipeline.html#take-screenshot-of-item
@@ -31,7 +32,8 @@ class ScreenshotPipeline:
         adapter = ItemAdapter(item)
         encoded_item_url = quote(adapter["url"])
         screenshot_url = self.SPLASH_URL.format(encoded_item_url)
-        request = scrapy.Request(screenshot_url)
+        request = SplashRequest(screenshot_url, args={'png':1})
+        # request = scrapy.Request(screenshot_url)
         response = await maybe_deferred_to_future(spider.crawler.engine.download(request, spider))
 
         if response.status != 200:
@@ -42,8 +44,12 @@ class ScreenshotPipeline:
         url = adapter["url"]
         url_hash = hashlib.md5(url.encode("utf8")).hexdigest()
         filename = f"out/images/{adapter['hostname']}_{url_hash}.png"
+
+        imgdata = base64.b64decode(response.data['png'])
+
         with open(filename, "wb") as f:
-            f.write(response.body)
+            f.write(imgdata)
+            # f.write(response.body)
 
         # Store filename in item.
         adapter["screenshot_filename"] = filename
