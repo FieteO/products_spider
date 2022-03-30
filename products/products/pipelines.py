@@ -49,7 +49,6 @@ class ScreenshotPipeline:
 
         with open(filename, "wb") as f:
             f.write(imgdata)
-            # f.write(response.body)
 
         # Store filename in item.
         adapter["screenshot_filename"] = filename

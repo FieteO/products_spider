@@ -9,9 +9,15 @@ Activate the environment.
 ``` bash
 source .venv/bin/activate
 ```
+
+### Run the spider
 Start scrapy splash (the javascript rendering engine)
 ``` bash
 docker-compose up
+```
+
+``` bash
+(spider)fiete@ubu:~/Documents/studium/bdp/spider/products$ scrapy crawl products_spider
 ```
 
 ## Goals
