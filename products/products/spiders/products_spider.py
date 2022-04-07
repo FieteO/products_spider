@@ -5,12 +5,14 @@ from scrapy_splash import SplashRequest
 
 from products.items import ProductsItem
 from urllib.parse import urlparse
+import pandas as pd
 
 
 class ProductsSpiderSpider(scrapy.Spider):
     name = 'products_spider'
     allowed_domains = ['ducati.com','citroen.com']
-    start_urls = ['https://ducati.com','https://citroen.com']
+    # start_urls = ['https://ducati.com','https://citroen.com']
+    start_urls = pd.read_csv('in/domains.csv')['0']
 
     def start_requests(self):
 
@@ -34,7 +36,8 @@ class ProductsSpiderSpider(scrapy.Spider):
         yield item
 
         # recursively parse subpages
-        links = response.css('a::attr(href)').extract()
-        for href in links:
-            yield SplashRequest(response.urljoin(href), self.parse, endpoint='render.json',
-                                args={ 'wait': 2, 'html':1, 'png':1 }, magic_response=True)
+        if False:
+            links = response.css('a::attr(href)').extract()
+            for href in links:
+                yield SplashRequest(response.urljoin(href), self.parse, endpoint='render.json',
+                                    args={ 'wait': 2, 'html':1, 'png':1 }, magic_response=True)
