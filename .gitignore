@@ -1,5 +1,7 @@
 .venv
 *.png
 *.csv
+*.log
+*.xpi
 **/__pycache__/**
 out
