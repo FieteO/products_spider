@@ -24,11 +24,13 @@ driver.install_addon(project_path.joinpath('i_dont_care_about_cookies-3.3.8-an+f
 
 urls = pd.read_csv(project_path.parent.joinpath('in/domains.csv'))['0']
 for url in urls:
-    driver.get(url)
     url_hash = hashlib.md5(url.encode("utf8")).hexdigest()
     outpath = project_path.parent.joinpath(f'out/screenshots/{url_hash}.png')
-    # wait between 2 and 3 seconds to not DoS the websites
-    time.sleep(random.uniform(2,3))
-    print(outpath)
-    driver.save_full_page_screenshot(outpath.as_posix())
+    if not outpath.exists:
+        # wait between 2 and 3 seconds to not DoS the websites
+        driver.get(url)
+        time.sleep(random.uniform(2,3))
+        driver.save_full_page_screenshot(outpath.as_posix())
+    else:
+        print('skipping')
 
